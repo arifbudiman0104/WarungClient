@@ -1,8 +1,8 @@
 function findbyid() {
+    let url = "http://localhost:8080/Warung/webresources/dagangan.dagangan";
     let view = document.getElementById('dagangan');
     let idobj = document.getElementById('inputid');
     let idn = idobj.elements[0].value;
-    let url = "http://localhost:8080/Warung/webresources/dagangan.dagangan";
     let nurl = url + '/' + idn;
     $.ajax({
         url: nurl,
@@ -23,10 +23,10 @@ function findbyid() {
 }
 
 function deletebyid() {
+    let url = "http://localhost:8080/Warung/webresources/dagangan.dagangan";
     let view = document.getElementById('delete');
     let idobj = document.getElementById('inputid');
     let idn = idobj.elements[0].value;
-    let url = "http://localhost:8080/Warung/webresources/dagangan.dagangan";
     let nurl = url + '/' + idn;
     $.ajax({
         url: nurl,
@@ -43,8 +43,8 @@ function deletebyid() {
 }
 
 function showalldata() {
-    let view = document.getElementById('show');
     let urls = "http://localhost:8080/Warung/webresources/dagangan.dagangan";
+    let view = document.getElementById('show');
 
     $.ajax({
         url: urls,
@@ -75,19 +75,23 @@ function xml2html(xml) {
 
 }
 
+
+//eror di create data
 function createdata() {
-    let view = document.getElementById('data');
-    let idobj = document.getElementById('inputid');
-    let ids = idobj.elements[0].value;
-    let namas = idobj.elements[1].value;
-    let nims = idobj.elements[2].value;
     let url = "http://localhost:8080/Warung/webresources/dagangan.dagangan";
+    let view = document.getElementById('dagangan');
+    let idobj = document.getElementById('inputid');
+    let id = idobj.elements[0].value;
+    let namadagangan = idobj.elements[1].value;
+    let jumlah = idobj.elements[3].value;
+    let harga = idobj.elements[2].value;
     let passvar =
-        '<mahasiswa>' +
-        '<id>' + ids + '</id>' +
-        '<nama>' + namas + '</nama>' +
-        '<nim>' + nims + '</nim>' +
-        '</mahasiswa>';
+        '<dagangan>' +
+        '<id>' + id + '</id>' +
+        '<namadagangan>' + namadagangan + '</namadagangan>' +
+        '<harga>' + harga + '</harga>' +
+        '<jumlah>' + jumlah + '</jumlah>' +
+        '</dagangan>';
 
     $.ajax({
         url: url,
@@ -95,7 +99,7 @@ function createdata() {
         contentType: 'application/xml',
         data: passvar,
         success: function (resp) {
-            view.innerHTML = ids + ' added';
+            view.innerHTML = id + ' added';
         },
         fail: function (e) {
             view.innerHTML = 'added failed';
@@ -118,12 +122,13 @@ function findforedit(id) {
         success: function (resp) {
             if (resp != null) {
                 let id = resp.getElementsByTagName("id")[0].childNodes[0].nodeValue;
-                let nama = resp.getElementsByTagName("nama")[0].childNodes[0].nodeValue;
-                let nim = resp.getElementsByTagName("nim")[0].childNodes[0].nodeValue;
+                let namadagangan = resp.getElementsByTagName("namadagangan")[0].childNodes[0].nodeValue;
+                let harga = resp.getElementsByTagName("harga")[0].childNodes[0].nodeValue;
+                let jumlah = resp.getElementsByTagName("jumlah")[0].childNodes[0].nodeValue;
                 document.getElementById("nid").value = id;
-                document.getElementById("nname").value = nama;
-                document.getElementById("nnim").value = nim;
-                //view.innerHTML = id + '-' + nama + '=' + nim;
+                document.getElementById("nnamadagangan").value = namadagangan;
+                document.getElementById("nharga").value = harga;
+                document.getElementById("njumlah").value = jumlah;
             }
             else { view.innerHTML = 'tidak ada data'; }
         },
@@ -131,26 +136,29 @@ function findforedit(id) {
     })
 }
 function updatedata() {
+    let url = "http://localhost:8080/Warung/webresources/dagangan.dagangan/";
     let view = document.getElementById('data');
     let idobj = document.getElementById('inputid');
-    let ids = idobj.elements[0].value;
-    let namas = idobj.elements[1].value;
-    let nims = idobj.elements[2].value;
-    let url = "http://localhost:8080/Warung/webresources/dagangan.dagangan/";
+    let id = idobj.elements[0].value;
+    let namadagangan = idobj.elements[1].value;
+    let harga = idobj.elements[2].value;
+    let jumlah = idobj.elements[3].value;
     let passvar =
-        '<mahasiswa>' +
-        '<id>' + ids + '</id>' +
-        '<nama>' + namas + '</nama>' +
-        '<nim>' + nims + '</nim>' +
-        '</mahasiswa>';
-    url += ids;
+        '<dagangan>' +
+        '<id>' + id + '</id>' +
+        '<namadagangan>' + namadagangan + '</namadagangan>' +
+        '<harga>' + harga + '</harga>' +
+        '<jumlah>' + jumlah + '</jumlah>' +
+        '</dagangan>';
+
+    url += id;
     $.ajax({
         url: url,
         method: 'PUT',
         contentType: 'application/xml',
         data: passvar,
         success: function (resp) {
-            view.innerHTML = 'id: ' + ids + ' updated';
+            view.innerHTML = 'id: ' + id + ' updated';
         },
         fail: function (e) {
             view.innerHTML = 'update failed';
