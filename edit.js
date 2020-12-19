@@ -14,7 +14,7 @@ function findbyid() {
                 let namadagangan = resp.getElementsByTagName("namadagangan")[0].childNodes[0].nodeValue;
                 let harga = resp.getElementsByTagName("harga")[0].childNodes[0].nodeValue;
                 let jumlah = resp.getElementsByTagName("jumlah")[0].childNodes[0].nodeValue;
-                view.innerHTML = 'ID ' + id + ' - ' + 'Nama Dagangan ' + namadagangan + ' - ' + 'Harga Rp.' + harga + ' - ' + 'Jumlah ' + jumlah;
+                view.innerHTML = 'ID ' + id + ' <br> ' + 'Nama Dagangan ' + namadagangan + ' <br> ' + 'Harga Rp.' + harga + ' <br> ' + 'Jumlah ' + jumlah;
             }
             else { view.innerHTML = 'tidak ada data'; }
         },
