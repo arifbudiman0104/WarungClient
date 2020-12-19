@@ -39,7 +39,6 @@ function deletebyid() {
             view.innerHTML = 'failed';
         }
     })
-
 }
 
 function showalldata() {
@@ -75,8 +74,6 @@ function xml2html(xml) {
 
 }
 
-
-//eror di create data
 function createdata() {
     let url = "http://localhost:8080/Warung/webresources/dagangan.dagangan";
     let view = document.getElementById('dagangan');
@@ -135,6 +132,7 @@ function findforedit(id) {
         fail: function (e) { }
     })
 }
+
 function updatedata() {
     let url = "http://localhost:8080/Warung/webresources/dagangan.dagangan/";
     let view = document.getElementById('data');
@@ -164,5 +162,4 @@ function updatedata() {
             view.innerHTML = 'update failed';
         }
     })
-
 }
